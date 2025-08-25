@@ -10,4 +10,6 @@ test.describe("My tests", () => {
         await kamal.openURL("https://opensource-demo.orangehrmlive.com/");
         await page.pause();
     })
+    test("My 2nd test", async(page)=>{
+        await page.goto("https://google.com");
 })
