@@ -1,8 +1,9 @@
 import { test, expect } from '@playwright/test'
-
+import { Kamal } from '../page/kamal'
+let kamal;
 test.describe("My Tests", () => {
     test("My first test", async ({ page }) => {
-        await page.goto("https://www.google.com/")
-
+        kamal = new Kamal(page)
+        await kamal.openURL();
     })
 })
