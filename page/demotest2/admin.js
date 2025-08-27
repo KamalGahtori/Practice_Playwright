@@ -16,3 +16,14 @@ export class HomePage {
         await expect(this.page.locator("span.oxd-text.oxd-text--span.oxd-main-menu-item--name")).toHaveText("Admin");
     }
 }
+export class Admin {
+    constructor(page) {
+        this.page = page;
+    }
+    async clickOnAdminModule() {
+        await this.page.getByText("Admin").click();
+    }
+    async enterUserName(username) {
+        await this.page.locator("//label[text()='Username']/parent::div/following-sibling::div[1]/input").fill(username);
+    }
+}
