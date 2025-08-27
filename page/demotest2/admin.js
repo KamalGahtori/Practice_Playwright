@@ -24,6 +24,17 @@ export class Admin {
         await this.page.getByText("Admin").click();
     }
     async enterUserName(username) {
-        await this.page.locator("//label[text()='Username']/parent::div/following-sibling::div[1]/input").fill(username);
+        const username1 = this.page.locator("//label[text()='Username']/parent::div/following-sibling::div[1]/input");
+        await expect(username1).toBeVisible();
+        await username1.fill(username);
+    }
+    async clickOnUserRoleDropdown() {
+        await this.page.locator('//label[text()="User Role"]/parent::div/following-sibling::div/child::div/child::div').click();
+    }
+    async clickOnAdminOption() {
+        await this.page.getByRole('option', { name: 'Admin' }).click();
+    }
+    async enterEmployeeName(employeeName) {
+        await this.page.locator('//label[text()="Employee Name"]/parent::div/following-sibling::div/child::div/child::div/child::div/following-sibling::input').fill(employeeName);
     }
 }
