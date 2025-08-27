@@ -31,7 +31,11 @@ test.describe("Orange HRM", () => {
         admin = new Admin(page);
         await admin.clickOnAdminModule();
         await admin.enterUserName("Admin");
+        await admin.clickOnUserRoleDropdown();
+        await admin.clickOnAdminOption();
         await page.pause();
+
+        await admin.enterEmployeeName("manda user")
     })
 
 

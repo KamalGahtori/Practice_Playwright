@@ -20,7 +20,7 @@ export class Login {
         await this.page.locator('.oxd-button.oxd-button').click();
     }
     async validateHomePage() {
-        await expect(this.page.locator(".oxd-text.oxd-text--h6")).toHaveText("Dashboard");
+        await expect(this.page.locator(".oxd-text.oxd-text--h6")).toHaveText("Admin");
     }
     async validateLogo() {
         await expect(this.page.locator('[class="oxd-brand-banner"]')).toBeVisible();
