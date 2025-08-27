@@ -2,11 +2,12 @@ import { test, expect } from '@playwright/test'
 import { beforeEach } from 'node:test'
 import { Login } from '../page/demotest2/login'
 import { Logout } from '../page/demotest2/logout';
-import { HomePage } from '../page/demotest2/admin';
+import { Admin, HomePage } from '../page/demotest2/admin';
 
 let login;
 let logout;
 let homepage;
+let admin;
 test.describe("Orange HRM", () => {
 
     test.beforeEach("Login", async ({ page }) => {
@@ -25,6 +26,12 @@ test.describe("Orange HRM", () => {
         await homepage.clickSearchOnHomePage();
         await homepage.searchModule("Admin");
         await homepage.validateSearchOperation();
+    })
+    test.only("Admin Module", async ({ page }) => {
+        admin = new Admin(page);
+        await admin.clickOnAdminModule();
+        await admin.enterUserName("Admin");
+        await page.pause();
     })
 
 
