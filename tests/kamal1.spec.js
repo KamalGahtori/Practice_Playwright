@@ -1,11 +1,16 @@
 import { test, expect } from '@playwright/test'
-import { Kamal } from '../page/kamal1';
-let kamal;
-test.describe("My Tests", () => {
 
-    test("My first test", async ({ page }) => {
-        kamal = new Kamal(page);
-        await kamal.openURL("https://google.com");
-        page.pause();
-    })
+
+test("Loop", async ({ page }) => {
+    await page.goto("https://demoblaze.com/#");
+    await expect(page).toHaveURL("https://demoblaze.com/#");
+    const products = page.locator(".list-group #itemc");
+    const count = await products.count();
+    for (let i = 0; i < count; i++) {
+        if (await products.nth(i).textContent() == "Laptops") {
+            await products.nth(i).click();
+            break;
+        }
+    }
+    await page.pause();
 })
