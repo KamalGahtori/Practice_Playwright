@@ -17,10 +17,12 @@ test.describe("Ecommerce", () => {
         await login.validateHomePage();
         await login.addIphone12ToCart();
         await login.validateCartItem();
-        await page.pause();
+
         await login.removeItemFromCart();
         await login.validateCartItemIsRemoved();
+        await page.pause();
         await login.addIphone12ToCart();
+
         await login.clickOnProceedToCheckout();
         await login.validateCheckoutPage();
 
