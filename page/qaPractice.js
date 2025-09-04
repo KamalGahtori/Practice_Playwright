@@ -28,15 +28,15 @@ export class Login {
         await expect(this.page.locator(".section-header")).toHaveText("SHOPPING CART");
     }
     async addIphone12ToCart() {
-        const iphoneItem = this.page.locator(".shop-item").filter({ hasText: "Apple iPhone 12, 128GB, Black" });
-        const addToCartButton = iphoneItem.getByRole('button', { name: 'Add to cart' });
+        const iphoneItem = this.page.locator(".shop-item")
+            .filter({ hasText: "Apple iPhone 12, 128GB, Black" });
+        const addToCartButton = iphoneItem.getByRole('button', { name: 'ADD TO CART' });
 
-        await Promise.all([
-            this.page.waitForSelector('.cart-item-title', { timeout: 10000 }), // wait for cart update
-            addToCartButton.click()
-        ]);
+        await addToCartButton.click();
+
+        // ✅ Assert cart total updates
+        await expect(this.page.getByText("Total $905.99")).toBeVisible({ timeout: 10000 });
     }
-
 
     // const button = this.page.locator('//span[contains(text(),"Apple iPhone 12")]/following-sibling::div//button');
     // await button.scrollIntoViewIfNeeded();
@@ -63,5 +63,30 @@ export class Login {
     async validateCheckoutPage() {
         await expect(this.page.locator("#shipping-address > h2")).toHaveText("Shipping Details");
     }
+    async enterPhoneNumber() {
+        await this.page.fill("#phone", "9876543210")
+    }
+    async enterStreet() {
+        await this.page.locator('[name="street"]').fill("Street 1");
+    }
+    async enterCity() {
+        await this.page.locator('[name="city"]').fill("Delhi");
+    }
 
+    async selectCountry() {
+        // Select India from the country dropdown
+        await this.page.locator('#countries_dropdown_menu').selectOption({ label: 'India' });
+
+        // Optional: assert that the dropdown value is updated
+        await expect(this.page.locator('#countries_dropdown_menu')).toHaveValue('India');
+    }
+    async clickOnSubmitOrder() {
+        await this.page.locator("#submitOrderBtn").click();
+    }
+    async validateConfirmationTextIsVisible() {
+        await expect(this.page.locator("#message")).toBeVisible();
+    }
+    async validateConfirmationText() {
+        await expect(this.page.locator("#message")).toHaveText("Congrats! Your order of  $905.99  has been registered and will be shipped to Street 1, Delhi - India.");
+    }
 }
