@@ -28,14 +28,22 @@ export class Login {
         await expect(this.page.locator(".section-header")).toHaveText("SHOPPING CART");
     }
     async addIphone12ToCart() {
-        await this.page.locator(".shop-item").filter({ hasText: "Apple iPhone 12, 128GB, Black" }).getByRole('button', { name: 'Add to cart' }).click();
-        // const button = this.page.locator('//span[contains(text(),"Apple iPhone 12")]/following-sibling::div//button');
-        // await button.scrollIntoViewIfNeeded();
-        // await button.waitFor({ state: 'visible' });
-        // await button.click({ force: true });
-        //this.page.getByRole('button', { name: 'ADD TO CART' }).first().click();
+        const iphoneItem = this.page.locator(".shop-item").filter({ hasText: "Apple iPhone 12, 128GB, Black" });
+        const addToCartButton = iphoneItem.getByRole('button', { name: 'Add to cart' });
 
+        await Promise.all([
+            this.page.waitForSelector('.cart-item-title', { timeout: 10000 }), // wait for cart update
+            addToCartButton.click()
+        ]);
     }
+
+
+    // const button = this.page.locator('//span[contains(text(),"Apple iPhone 12")]/following-sibling::div//button');
+    // await button.scrollIntoViewIfNeeded();
+    // await button.waitFor({ state: 'visible' });
+    // await button.click({ force: true });
+    //this.page.getByRole('button', { name: 'ADD TO CART' }).first().click();
+
     async validateCartItem() {
         const validateCartItem = this.page.locator(".cart-item-title");
         // await validateCartItem.scrollIntoViewIfNeeded()
