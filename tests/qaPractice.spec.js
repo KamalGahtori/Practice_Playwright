@@ -17,16 +17,20 @@ test.describe("Ecommerce", () => {
         await login.validateHomePage();
         await login.addIphone12ToCart();
         await login.validateCartItem();
-
         await login.removeItemFromCart();
         await login.validateCartItemIsRemoved();
-        await page.pause();
         await login.addIphone12ToCart();
-
         await login.clickOnProceedToCheckout();
         await login.validateCheckoutPage();
+        await login.enterPhoneNumber();
+        await login.enterStreet();
+        await login.enterCity();
+        await login.selectCountry();
+        await login.clickOnSubmitOrder();
+        await login.validateConfirmationTextIsVisible();
+        await login.validateConfirmationText();
 
-        //await page.pause();
+        await page.pause();
 
 
 
