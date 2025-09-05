@@ -1,3 +1,4 @@
+
 import { test, expect } from '@playwright/test'
 import data from '../Test Data/registerForm.json'
 import { RegisterForm } from '../page/registerForm';
@@ -16,6 +17,10 @@ test("Go to Register Page", async ({ page }) => {
     await registerForm.enterPhoneNumber();
     await registerForm.openCountryDropdown();
     await registerForm.selectCountry();
+    await registerForm.enterEmail();
+    await registerForm.enterPassword();
+    await registerForm.checkTandC();
+    await registerForm.clickOnRegisterButton();
     await page.pause();
 
 })

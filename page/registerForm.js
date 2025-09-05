@@ -29,6 +29,18 @@ export class RegisterForm {
         await this.page.click("#countries_dropdown_menu");
     }
     async selectCountry() {
-        await this.page.locator('#countries_dropdown_menu > option').selectOption("India");
+        await this.page.locator('#countries_dropdown_menu').selectOption("India");
+    }
+    async enterEmail() {
+        await this.page.fill("#emailAddress", "test@gmail.com");
+    }
+    async enterPassword() {
+        await this.page.fill("#password", "Password");
+    }
+    async checkTandC() {
+        await this.page.click("#exampleCheck1")
+    }
+    async clickOnRegisterButton() {
+        await this.page.click("#registerBtn");
     }
 }
